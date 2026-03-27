@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لـمّة العيد</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Tajawal:wght@300;400;500;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:       #fcf8f6;
+  --card:     #fffdfc;
+  --blush:    #f5e8ee;
+  --rose:     #d8a9bc;
+  --rose-d:   #b78498;
+  --gold:     #d5bc8b;
+  --gold-l:   #efe1bb;
+  --ink:      #3c2d37;
+  --mid:      #8c6b7b;
+  --soft:     #b79cac;
+  --border:   rgba(196,132,156,0.18);
+  --accent:   #d8a9bc;
+  --accent-2: #f5e8ee;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; }
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 56px 24px 80px;
+  direction: rtl;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.wrap { position: relative; z-index: 1; width: 100%; max-width: 450px; }
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+  animation: rise 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.logo-hero-frame {
+  padding: 10px;
+  background: #fffaf4;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+.logo-hero {
+  width: 100%;
+  height: 132px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #956277 0%, #b78498 58%, #d5bc8b 100%);
+}
+.logo-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+
+.header-eyebrow {
+  font-family: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.header-title {
+  font-family: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 4rem;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.02;
+  margin-bottom: 10px;
+}
+.header-title .warm {
+  color: var(--rose-d);
+  font-style: italic;
+}
+.header-sub {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--soft);
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+
+.ribbon-bar { width: 100%; height: 52px; margin-bottom: -1px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(60,45,55,0.04);
+  animation: rise 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+}
+
+.seats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+  background: #fffaf5;
+}
+.seats-left { flex-shrink: 0; }
+.seats-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.7rem;
+  font-weight: 500;
+  color: var(--rose-d);
+  line-height: 1;
+}
+.seats-label {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+  margin-top: 4px;
+}
+.seats-right { flex: 1; }
+.track {
+  height: 2px;
+  background: #ecdcc8;
+  position: relative;
+  margin-bottom: 10px;
+}
+.track-fill {
+  position: absolute;
+  top: 0; left: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold-l), var(--terracotta));
+  width: 0;
+  transition: width 1.1s cubic-bezier(0.4,0,0.2,1);
+}
+.pips { display: flex; gap: 5px; }
+.pip {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #ecdcc8;
+  transition: background 0.4s;
+  flex-shrink: 0;
+}
+.pip.on   { background: var(--accent); }
+.pip.full { background: var(--gold); }
+.seats-note {
+  font-size: 10px;
+  color: var(--soft);
+  letter-spacing: 0.02em;
+  margin-top: 6px;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.page { display: none; }
+.page.active {
+  display: block;
+  animation: rise 0.4s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px 28px 0;
+}
+.sdot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #eadccf;
+  transition: all 0.3s;
+}
+.sdot.active { background: var(--rose-d); transform: scale(1.25); }
+.sdot.done   { background: var(--gold); }
+.sline { width: 24px; height: 1px; background: #eadccf; }
+
+.form-body { padding: 24px 28px 28px; }
+.field { margin-bottom: 24px; }
+.field:last-of-type { margin-bottom: 0; }
+
+.field-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  margin-bottom: 10px;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.field-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  padding: 8px 0 10px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.field-input::placeholder {
+  color: var(--soft);
+  font-size: 13px;
+  font-weight: 400;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+.field-input:focus { border-bottom-color: var(--rose-d); }
+
+.underline {
+  height: 2px;
+  background: var(--rose-d);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s;
+  margin-top: -1px;
+}
+.field-input:focus ~ .underline { transform: scaleX(1); }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-gem {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.btn-row { display: flex; gap: 8px; padding: 0 28px 28px; }
+.btn-primary {
+  flex: 2;
+  padding: 14px 20px;
+  background: var(--ink);
+  color: #fffaf6;
+  border: none;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--rose-d);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  z-index: 0;
+}
+.btn-primary:hover::after { transform: scaleX(1); }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-primary:active { transform: scale(0.99); }
+.btn-primary:disabled { opacity: 0.5; cursor: default; }
+
+.btn-ghost {
+  flex: 1;
+  padding: 14px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--soft);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--rose-d); color: var(--rose-d); }
+
+.review-body { padding: 20px 28px 0; }
+.review-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+}
+.review-row:last-child { border-bottom: none; }
+.review-key {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+  flex-shrink: 0;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+.review-val {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: right;
+  line-height: 1.8;
+}
+
+.confirm-body {
+  padding: 36px 28px 28px;
+  text-align: center;
+}
+.confirm-check {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--rose-d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.confirm-check svg { width: 22px; height: 22px; }
+
+.confirm-name {
+  font-family: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: rise 0.5s ease 0.3s both;
+}
+.confirm-msg {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--soft);
+  line-height: 2;
+  opacity: 0;
+  animation: rise 0.5s ease 0.45s both;
+}
+.confirm-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  padding: 8px 14px;
+  border: 1px solid rgba(191,123,82,0.18);
+  background: #fff7ef;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--rose-d);
+  opacity: 0;
+  animation: rise 0.5s ease 0.6s both;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+
+.card-footer {
+  padding: 18px 28px 20px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  background: #fffaf5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-club-ar {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 5px;
+  letter-spacing: 0.02em;
+}
+.footer-club-en {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--soft);
+  direction: ltr;
+  letter-spacing: 0.01em;
+}
+.footer-text { display:none; }
+
+.full-body {
+  padding: 48px 28px;
+  text-align: center;
+}
+.full-body h2 {
+  font-family: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.full-body p {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--soft);
+  line-height: 1.9;
+}
+
+
+.info-card {
+  padding: 12px 10px;
+  background: #fdf9f5;
+  border: 1px solid var(--border);
+}
+.info-k {
+  font-size: 10px;
+  color: var(--soft);
+  margin-bottom: 4px;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-weight: 500;
+}
+.info-v {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.7;
+}
+.page-copy {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 2.15;
+  margin-bottom: 24px;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.note-box {
+  margin-top: 16px;
+  padding: 10px 12px;
+  background: #fbf6f3;
+  border: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.8;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="header">
+    <!-- Logo hero band -->
+    <div class="logo-hero-frame">
+      <div class="logo-hero">
+        <img src="=logo.png" alt="AI Club" width="500" height="600">
+      </div>
+    </div>
+
+     <!-- Ribbon -->
+  <svg class="ribbon-bar" viewBox="0 0 440 52" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M-10 26 Q110 8 220 26 Q330 44 450 26" stroke="#ef9ab6" stroke-width="20" stroke-linecap="round" fill="none" opacity="0.45"/>
+    <path d="M-10 28 Q110 10 220 28 Q330 46 450 28" stroke="#ffd8e6" stroke-width="9" stroke-linecap="round" fill="none" opacity="0.55"/>
+    <path d="M450 12 Q340 38 220 22 Q100 6 -10 30" stroke="#9d83e6" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+    <path d="M450 6 Q350 28 240 16 Q130 4 -10 22" stroke="#d39a2f" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.4"/>
+    <!-- flags -->
+    <polygon points="62,14 74,14 68,26"  fill="#f4a8c0" opacity="0.9"/>
+    <polygon points="96,10 108,10 102,22" fill="#a88bf1" opacity="0.9"/>
+    <polygon points="130,8 142,8 136,20" fill="#b5e1d0" opacity="0.9"/>
+    <polygon points="164,11 176,11 170,23" fill="#efc061" opacity="0.9"/>
+    <polygon points="198,8 210,8 204,20" fill="#f4a8c0" opacity="0.9"/>
+    <polygon points="232,11 244,11 238,23" fill="#a88bf1" opacity="0.9"/>
+    <polygon points="266,9 278,9 272,21" fill="#b5e1d0" opacity="0.9"/>
+    <polygon points="300,12 312,12 306,24" fill="#efc061" opacity="0.9"/>
+    <polygon points="334,10 346,10 340,22" fill="#f4a8c0" opacity="0.9"/>
+    <polygon points="368,13 380,13 374,25" fill="#a88bf1" opacity="0.9"/>
+    <path d="M62,14 L96,10 L130,8 L164,11 L198,8 L232,11 L266,9 L300,12 L334,10 L368,13 L380,13" stroke="#d39a2f" stroke-width="0.6" fill="none" opacity="0.45"/>
+    <!-- chandelier -->
+    <g transform="translate(220,0)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#d39a2f" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.6"/>
+      <circle cx="0" cy="11" r="2.5" fill="#efc061" opacity="0.9"/>
+      <path d="M0 14 Q-12 18 -17 22" stroke="#9d83e6" stroke-width="1" fill="none"/>
+      <path d="M0 14 Q12 18 17 22" stroke="#9d83e6" stroke-width="1" fill="none"/>
+      <line x1="0" y1="14" x2="0" y2="24" stroke="#9d83e6" stroke-width="1"/>
+      <circle cx="-17" cy="23" r="2" fill="#f4a8c0"/>
+      <circle cx="0"   cy="25" r="2" fill="#f4a8c0"/>
+      <circle cx="17"  cy="23" r="2" fill="#f4a8c0"/>
+      <rect x="-18" y="18" width="2" height="5" rx="0.5" fill="#faf7f2"/>
+      <rect x="-1"  y="20" width="2" height="5" rx="0.5" fill="#faf7f2"/>
+      <rect x="16"  y="18" width="2" height="5" rx="0.5" fill="#faf7f2"/>
+      <ellipse cx="-17" cy="18" rx="0.9" ry="1.5" fill="#efc061" opacity="0.9"/>
+      <ellipse cx="0"   cy="20" rx="0.9" ry="1.5" fill="#efc061" opacity="0.9"/>
+      <ellipse cx="17"  cy="18" rx="0.9" ry="1.5" fill="#efc061" opacity="0.9"/>
+      <ellipse cx="0"   cy="30" rx="5" ry="2.8" fill="#f4a8c0" opacity="0.65"/>
+      <ellipse cx="0"   cy="34" rx="2.2" ry="2.8" fill="#efc061" opacity="0.7"/>
+    </g>
+    <circle cx="36"  cy="44" r="1.4" fill="#b89a4e" opacity="0.5"/>
+    <circle cx="404" cy="42" r="1.4" fill="#b89a4e" opacity="0.45"/>
+    <circle cx="18"  cy="36" r="1" fill="#a88bf1" opacity="0.5"/>
+    <circle cx="422" cy="34" r="1" fill="#a88bf1" opacity="0.45"/>
+  </svg>
+
+    <div class="header-eyebrow">لقاء بعد العيد</div>
+    <h1 class="header-title"><span class="warm">لـمّة</span> العيد</h1>
+    <p class="header-sub">  <strong> 
+         دعـــــوة خـاصــــة بأعضــــــاء النــــــادي </strong>
+    </p>
+    <p class="header-sub">
+    مساحة خفيفة للتعارف، تغيير الجو، وقضاء وقت لطيف بعيدًا عن الدراسة
+    </p>
+
+  </div>
+
+  
+  <!-- Card -->
+  <div class="card">
+
+    <!-- Seats -->
+    <div class="seats">
+      <div class="seats-left">
+        <div class="seats-n" id="seatsNum">30</div>
+        <div class="seats-label">مقاعد متبقية</div>
+      </div>
+      <div class="seats-right">
+        <div class="track"><div class="track-fill" id="trackFill"></div></div>
+        <div class="pips" id="pips"></div>
+        <div class="seats-note">الأولوية لأول 30 تسجيل</div>
+      </div>
+    </div>
+
+    <!-- PAGE 1 -->
+    <div class="page active" id="p1">
+      <div class="form-body" style="padding-top:28px;">
+        <p class="page-copy">
+          <strong>لـمّة العيد</strong> لقاء رتّبناه للعيد ليكون مساحة أخف في أيام الدراسة، نلتقي فيها نتعرف على بعض أكثر في جو لطيف وبسيط داخل الكلية.
+  مع فطور ومسابقات خفيفة، المقاعد محدودة.
+</p>
+        <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+        <div style="display:flex;gap:16px;text-align:center;flex-wrap:wrap;">
+          <div class="info-card" style="flex:1;min-width:120px;">
+            <div class="info-k">المكان</div>
+            <div class="info-v">مكتبة كلية الحاسبات<br>غـرفـــــــة رقـــم 210</div>
+          </div>
+          <div class="info-card" style="flex:1;min-width:120px;">
+            <div class="info-k">الوقت</div>
+            <div class="info-v">11:30 بدايـــة الفعاليـــة<br>12:00 بدايـــة الفطور</div>
+          </div>
+        </div>
+        <div class="note-box"> في حال عدم تأكدك من الحضور، نرجو إتاحة المقعد لمن هو متأكد من حضوره.
+          ونأمـــــــل أن نــــراكِ في الفعاليــات القادمـــــــة.
+        </div>
+      </div>
+      <div class="btn-row" style="padding-top:20px;">
+        <button class="btn-primary" onclick="goTo(2)" style="flex:1;">
+          <span>تسجيل الحضور ←</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page" id="p2">
+      <div class="steps">
+        <div class="sdot done"></div><div class="sline"></div>
+        <div class="sdot active"></div><div class="sline"></div>
+        <div class="sdot"></div>
+      </div>
+      <div class="form-body">
+        <p class="page-copy" style="margin-bottom:20px;">
+           اكتبي اسمك ورقم الواتساب  لتاكيد الحجز، ولنتمكن من التواصل معك في حال حدوث أي تحديث قبل الفعالية.
+        </p>
+        <div class="field">
+          <label class="field-label" for="f-name">الاسم</label>
+          <input class="field-input" id="f-name" type="text" placeholder=" اسمك" autocomplete="off">
+          <div class="underline"></div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="f-phone">رقم الواتساب</label>
+          <input class="field-input" id="f-phone" type="tel" placeholder="05xxxxxxxx">
+          <div class="underline"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="goTo(3,['f-name','f-phone'])"><span>التالي ←</span></button>
+        <button class="btn-ghost" onclick="goTo(1)">رجوع</button>
+      </div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page" id="p3">
+      <div class="steps">
+        <div class="sdot done"></div><div class="sline"></div>
+        <div class="sdot done"></div><div class="sline"></div>
+        <div class="sdot active"></div>
+      </div>
+      <div class="form-body">
+        <p class="page-copy">
+          خذي نظرة أخيرة على بياناتك، وإذا كانت صحيحة فأكدي الحجز.
+          يُحتسب المقعد مباشرة بعد التأكيد.
+        </p>
+        <div class="note-box">  يُحتسب المقعد مباشرة بعد التأكيد ضمن العدد المتاح
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="goTo(4)"><span>مراجعة البيانات ←</span></button>
+        <button class="btn-ghost" onclick="goTo(2)">رجوع</button>
+      </div>
+    </div>
+
+    <!-- PAGE 4: Review -->
+    <div class="page" id="p4">
+      <div class="steps">
+        <div class="sdot done"></div><div class="sline"></div>
+        <div class="sdot done"></div><div class="sline"></div>
+        <div class="sdot active"></div>
+      </div>
+      <div class="review-body">
+        <div class="review-row">
+          <span class="review-key">الاسم</span>
+          <span class="review-val" id="rv-name">—</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">الواتساب</span>
+          <span class="review-val" id="rv-phone">—</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">التفاصيل</span>
+          <span class="review-val" id="rv-yr">—</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">الموقع</span>
+          <span class="review-val" id="rv-bring">—</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">البرنامج</span>
+          <span class="review-val">١١:٣٠ بداية الفعالية · ١٢:٠٠ بداية الفطور</span>
+        </div>
+      </div>
+      <div class="btn-row" style="padding-top:20px;">
+        <button class="btn-primary" id="confirmBtn" onclick="doSubmit()"><span>تأكيد الحجز</span></button>
+        <button class="btn-ghost" onclick="goTo(3)">تعديل</button>
+      </div>
+    </div>
+
+    <!-- PAGE 5: Confirmed -->
+    <div class="page" id="p5">
+      <div class="confirm-body">
+        <div class="confirm-check">
+          <svg viewBox="0 0 22 22" fill="none">
+            <polyline points="3,11 8,17 19,5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="confirm-name" id="conf-name">تم حجز مقعدك</div>
+        <p class="confirm-msg">
+          تم تأكيد حضورك.<br>
+          ننتظرك في مكتبة كلية الحاسبات، غرفة 210<br>
+          11:30 بداية الفعالية · 12:00 بداية الفطور
+        </p>
+        <div class="confirm-tag">بانتظارك</div>
+      </div>
+    </div>
+
+    <!-- PAGE 6: Full -->
+    <div class="page" id="p6">
+      <div class="full-body">
+        <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+        <h2>اكتمل الحجز.</h2>
+        <p>شكرًا لاهتمامك.<br>تابعي النادي للفعاليات القادمة.</p>
+        <div class="divider" style="margin-top:24px;"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <span class="footer-club-ar">نــــــادي الـــذكــــــاء الاصطـنــــاعي والعلـــــــــــــــــوم التقنيـــــــــــــة</span>
+      <span class="footer-club-en">Artificial Intelligence &amp; Tech Sciences Club</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let registered = 7;
+const MAX = 30;
+let fd = {};
+
+function updateSeats() {
+  const left = MAX - registered;
+  const el = document.getElementById('seatsNum');
+  if (el) el.textContent = Math.max(0, left);
+  const fill = document.getElementById('trackFill');
+  if (fill) setTimeout(() => { fill.style.width = (registered / MAX * 100) + '%'; }, 350);
+  const pips = document.getElementById('pips');
+  if (pips) {
+    pips.innerHTML = '';
+    for (let i = 0; i < 10; i++) {
+      const d = document.createElement('div');
+      d.className = 'pip';
+      const thresh = Math.round((i + 1) * MAX / 10);
+      if (registered >= thresh) d.classList.add(i === 9 ? 'full' : 'on');
+      pips.appendChild(d);
+    }
+  }
+}
+
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const t = document.getElementById('p' + n);
+  if (t) t.classList.add('active');
+}
+
+function goTo(n, inputs, radios) {
+  if (inputs) {
+    for (const id of inputs) {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) {
+        if (el) { el.focus(); el.style.borderBottomColor = 'var(--rose)'; setTimeout(() => el.style.borderBottomColor = '', 1500); }
+        return;
+      }
+    }
+    for (const id of inputs) { const el = document.getElementById(id); if (el) fd[id] = el.value.trim(); }
+  }
+  if (radios) {
+    for (const g of radios) {
+      const s = document.querySelector('input[name="' + g + '"]:checked');
+      if (!s) return;
+      fd[g] = s.value;
+    }
+  }
+  if (n === 4) {
+    document.getElementById('rv-name').textContent  = fd['f-name']  || '—';
+    document.getElementById('rv-phone').textContent = fd['f-phone'] || '—';
+    document.getElementById('rv-yr').textContent    = 'مسابقات وفطور · العدد محدود';
+    document.getElementById('rv-bring').textContent = 'مكتبة كلية الحاسبات · غرفة 104';
+  }
+  showPage(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function doSubmit() {
+  const btn = document.getElementById('confirmBtn');
+  if (!btn) return;
+  btn.disabled = true;
+  btn.querySelector('span').textContent = '...';
+
+  const FORM_ID   = '1FAIpQLSdKWizps3iKBr04L_Kk8w-agCdQaXv8z0lWQnFsqDjGQlvjKg';
+  const ENTRY_NAME  = 'entry.457510844';
+  const ENTRY_PHONE = 'entry.454338018';
+
+  const body = new FormData();
+  body.append(ENTRY_NAME,  fd['f-name']  || '');
+  body.append(ENTRY_PHONE, fd['f-phone'] || '');
+
+  try {
+    await fetch(
+      `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`,
+      { method: 'POST', body, mode: 'no-cors' }
+    );
+  } catch (_) {
+    // no-cors always throws — submission still goes through
+  }
+
+  registered++;
+  updateSeats();
+  const n = document.getElementById('conf-name');
+  if (n) n.textContent = 'تم حجز مقعدك';
+  showPage(registered <= MAX ? 5 : 6);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateSeats();
+</script>
+</body>
+</html>
