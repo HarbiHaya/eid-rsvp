@@ -487,7 +487,7 @@ body::before {
     <!-- Logo hero band -->
     <div class="logo-hero-frame">
       <div class="logo-hero">
-        <img src="=logo.png" alt="AI Club" width="500" height="600">
+        <img src="logo.png" alt="AI Club" width="500" height="600">
       </div>
     </div>
 
@@ -713,29 +713,62 @@ body::before {
 </div>
 
 <script>
-let registered = 7;
-const MAX = 30;
+// ── Config ─────────────────────────────────────────────
+const CONFIG = {
+  MAX_SEATS   : 30,
+  FORM_ID     : '1FAIpQLSdKWizps3iKBr04L_Kk8w-agCdQaXv8z0lWQnFsqDjGQlvjKg',
+  ENTRY_NAME  : 'entry.457510844',
+  ENTRY_PHONE : 'entry.454338018',
+  APPS_SCRIPT : 'https://script.google.com/macros/s/AKfycbwXOCfCqtuPp-G_yVexDUGaadhjFY4OLUTE-4Ej0dkpACPmlh0axhfs4_cNotZVdT0v/exec',
+  EVENT: {
+    details  : 'مسابقات وفطور · العدد محدود',
+    location : 'مكتبة كلية الحاسبات · غرفة 210',
+    time     : '١١:٣٠ بداية الفعالية · ١٢:٠٠ بداية الفطور'
+  }
+};
+// ───────────────────────────────────────────────────────
+
+let registered = 0;
 let fd = {};
 
+// Fetch live count from Sheets via Apps Script
+async function fetchCount() {
+  try {
+    const res  = await fetch(CONFIG.APPS_SCRIPT);
+    const data = await res.json();
+    registered = Math.max(0, Number(data.count) || 0);
+  } catch (_) {
+    registered = 0;
+  }
+  updateSeats();
+  if (registered >= CONFIG.MAX_SEATS) showPage(6);
+}
+
+// Render seats bar & pips
 function updateSeats() {
-  const left = MAX - registered;
-  const el = document.getElementById('seatsNum');
+  const left = CONFIG.MAX_SEATS - registered;
+  const el   = document.getElementById('seatsNum');
   if (el) el.textContent = Math.max(0, left);
+
   const fill = document.getElementById('trackFill');
-  if (fill) setTimeout(() => { fill.style.width = (registered / MAX * 100) + '%'; }, 350);
+  if (fill) setTimeout(() => {
+    fill.style.width = (registered / CONFIG.MAX_SEATS * 100) + '%';
+  }, 350);
+
   const pips = document.getElementById('pips');
   if (pips) {
     pips.innerHTML = '';
     for (let i = 0; i < 10; i++) {
-      const d = document.createElement('div');
-      d.className = 'pip';
-      const thresh = Math.round((i + 1) * MAX / 10);
+      const d      = document.createElement('div');
+      d.className  = 'pip';
+      const thresh = Math.round((i + 1) * CONFIG.MAX_SEATS / 10);
       if (registered >= thresh) d.classList.add(i === 9 ? 'full' : 'on');
       pips.appendChild(d);
     }
   }
 }
 
+// Page navigation
 function showPage(n) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const t = document.getElementById('p' + n);
@@ -747,11 +780,18 @@ function goTo(n, inputs, radios) {
     for (const id of inputs) {
       const el = document.getElementById(id);
       if (!el || !el.value.trim()) {
-        if (el) { el.focus(); el.style.borderBottomColor = 'var(--rose)'; setTimeout(() => el.style.borderBottomColor = '', 1500); }
+        if (el) {
+          el.focus();
+          el.style.borderBottomColor = 'var(--rose)';
+          setTimeout(() => el.style.borderBottomColor = '', 1500);
+        }
         return;
       }
     }
-    for (const id of inputs) { const el = document.getElementById(id); if (el) fd[id] = el.value.trim(); }
+    for (const id of inputs) {
+      const el = document.getElementById(id);
+      if (el) fd[id] = el.value.trim();
+    }
   }
   if (radios) {
     for (const g of radios) {
@@ -763,45 +803,45 @@ function goTo(n, inputs, radios) {
   if (n === 4) {
     document.getElementById('rv-name').textContent  = fd['f-name']  || '—';
     document.getElementById('rv-phone').textContent = fd['f-phone'] || '—';
-    document.getElementById('rv-yr').textContent    = 'مسابقات وفطور · العدد محدود';
-    document.getElementById('rv-bring').textContent = 'مكتبة كلية الحاسبات · غرفة 104';
+    document.getElementById('rv-yr').textContent    = CONFIG.EVENT.details;
+    document.getElementById('rv-bring').textContent = CONFIG.EVENT.location;
   }
   showPage(n);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// Submit to Google Forms then re-fetch real count
 async function doSubmit() {
   const btn = document.getElementById('confirmBtn');
   if (!btn) return;
   btn.disabled = true;
   btn.querySelector('span').textContent = '...';
 
-  const FORM_ID   = '1FAIpQLSdKWizps3iKBr04L_Kk8w-agCdQaXv8z0lWQnFsqDjGQlvjKg';
-  const ENTRY_NAME  = 'entry.457510844';
-  const ENTRY_PHONE = 'entry.454338018';
-
   const body = new FormData();
-  body.append(ENTRY_NAME,  fd['f-name']  || '');
-  body.append(ENTRY_PHONE, fd['f-phone'] || '');
+  body.append(CONFIG.ENTRY_NAME,  fd['f-name']  || '');
+  body.append(CONFIG.ENTRY_PHONE, fd['f-phone'] || '');
 
   try {
     await fetch(
-      `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`,
-      { method: 'POST', body, mode: 'no-cors' }
+      'https://docs.google.com/forms/d/e/' + CONFIG.FORM_ID + '/formResponse',
+      { method: 'POST', body: body, mode: 'no-cors' }
     );
   } catch (_) {
-    // no-cors always throws — submission still goes through
+    // no-cors always throws — submission still lands in Sheets
   }
 
-  registered++;
-  updateSeats();
-  const n = document.getElementById('conf-name');
-  if (n) n.textContent = 'تم حجز مقعدك';
-  showPage(registered <= MAX ? 5 : 6);
+  // wait a moment then re-fetch live count
+  await new Promise(r => setTimeout(r, 1200));
+  await fetchCount();
+
+  const nameEl = document.getElementById('conf-name');
+  if (nameEl) nameEl.textContent = 'تم حجز مقعدك، ' + (fd['f-name'] || '');
+  showPage(registered <= CONFIG.MAX_SEATS ? 5 : 6);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-updateSeats();
+// Init — load live count on page open
+fetchCount();
 </script>
 </body>
 </html>
