@@ -24,8 +24,13 @@
   --board:    #160f36;
 }
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { font-size:16px; }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { font-size: 16px; }
 
 body {
   min-height: 100vh;
@@ -79,7 +84,7 @@ body::after {
 
 .header-top {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; /* in RTL this places it on the left */
   margin-bottom: 14px;
 }
 
@@ -111,7 +116,7 @@ body::after {
   -webkit-backdrop-filter: blur(10px);
   animation: fadeUp 0.7s ease-out 0.1s both;
   overflow: hidden;
-  border-radius: 22px;
+  border-radius: 14px;
   box-shadow: 0 18px 50px rgba(0,0,0,0.28);
 }
 
@@ -124,6 +129,7 @@ body::after {
   border-bottom: 1px solid rgba(255,255,255,0.07);
   background: rgba(255,255,255,0.03);
 }
+
 .seats-n {
   font-size: 2.4rem;
   font-weight: 700;
@@ -131,6 +137,7 @@ body::after {
   line-height: 1;
   flex-shrink: 0;
 }
+
 .seats-label {
   font-size: 10px;
   font-weight: 400;
@@ -139,40 +146,66 @@ body::after {
   margin-top: 3px;
   text-transform: uppercase;
 }
+
 .seats-right { flex: 1; }
+
 .track {
   height: 2px;
   background: rgba(255,255,255,0.08);
   margin-bottom: 9px;
   position: relative;
 }
+
 .track-fill {
   position: absolute;
-  top: 0; left: 0; height: 2px;
+  top: 0;
+  left: 0;
+  height: 2px;
   background: linear-gradient(90deg, var(--gold), var(--coral));
   width: 0;
   transition: width 1.4s cubic-bezier(0.4,0,0.2,1);
 }
-.pips { display: flex; gap: 5px; }
+
+.pips {
+  display: flex;
+  gap: 5px;
+}
+
 .pip {
-  width: 5px; height: 5px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: rgba(255,255,255,0.1);
   transition: background 0.4s;
 }
+
 .pip.on   { background: var(--coral); }
 .pip.full { background: var(--gold); }
-.seats-note { font-size: 10px; color: var(--off-soft); margin-top: 5px; letter-spacing: 0.04em; }
+
+.seats-note {
+  font-size: 10px;
+  color: var(--off-soft);
+  margin-top: 5px;
+  letter-spacing: 0.04em;
+}
 
 /* ── PAGES ── */
 .page { display: none; }
+
 .page.active {
   display: block;
   animation: fadeUp 0.4s cubic-bezier(0.22,1,0.36,1) both;
 }
+
 @keyframes fadeUp {
-  from { opacity:0; transform:translateY(14px); }
-  to   { opacity:1; transform:translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── STEPS ── */
@@ -183,15 +216,27 @@ body::after {
   gap: 6px;
   padding: 20px 28px 0;
 }
+
 .sdot {
-  width: 7px; height: 7px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: rgba(255,255,255,0.12);
   transition: all 0.3s;
 }
-.sdot.active { background: var(--mint); transform: scale(1.35); }
-.sdot.done   { background: var(--gold); }
-.sline { width: 22px; height: 1px; background: rgba(255,255,255,0.1); }
+
+.sdot.active {
+  background: var(--mint);
+  transform: scale(1.35);
+}
+
+.sdot.done { background: var(--gold); }
+
+.sline {
+  width: 22px;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
 
 /* ── FORM ── */
 .form-body { padding: 24px 28px 28px; }
@@ -223,8 +268,15 @@ body::after {
   transition: border-color 0.2s;
   -webkit-appearance: none;
 }
-.field-input::placeholder { color: var(--off-soft); font-size: 13px; }
-.field-input:focus { border-bottom-color: var(--mint); }
+
+.field-input::placeholder {
+  color: var(--off-soft);
+  font-size: 13px;
+}
+
+.field-input:focus {
+  border-bottom-color: var(--mint);
+}
 
 .underline {
   height: 2px;
@@ -234,7 +286,10 @@ body::after {
   transition: transform 0.3s;
   margin-top: -1px;
 }
-.field-input:focus ~ .underline { transform: scaleX(1); }
+
+.field-input:focus ~ .underline {
+  transform: scaleX(1);
+}
 
 /* ── PAGE COPY ── */
 .page-copy {
@@ -252,14 +307,16 @@ body::after {
   flex-wrap: wrap;
   margin-bottom: 16px;
 }
+
 .info-card {
   flex: 1;
   min-width: 100px;
   padding: 12px 14px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 14px;
+  border-radius: 8px;
 }
+
 .info-k {
   font-size: 9.5px;
   font-weight: 500;
@@ -268,13 +325,18 @@ body::after {
   color: var(--off-soft);
   margin-bottom: 5px;
 }
+
 .info-v {
   font-size: 13px;
   font-weight: 400;
   color: var(--off);
   line-height: 1.6;
 }
-.info-v .accent { color: var(--coral); font-weight: 600; }
+
+.info-v .accent {
+  color: var(--coral);
+  font-weight: 600;
+}
 
 /* ── NOTE BOX ── */
 .note-box {
@@ -287,27 +349,41 @@ body::after {
   color: var(--off-dim);
   line-height: 1.9;
   margin-top: 12px;
-  border-radius: 14px;
+  border-radius: 8px;
 }
 
 /* ── DIVIDER ── */
 .div-line {
-  display: flex; align-items: center; gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 18px 0;
 }
-.div-line-l { flex:1; height:1px; background:rgba(255,255,255,0.06); }
+
+.div-line-l {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
 .div-gem {
-  width: 5px; height: 5px;
+  width: 5px;
+  height: 5px;
   background: var(--gold);
   transform: rotate(45deg);
   flex-shrink: 0;
 }
 
 /* ── BUTTONS ── */
-.btn-row { display: flex; gap: 8px; padding: 0 28px 28px; }
+.btn-row {
+  display: flex;
+  gap: 8px;
+  padding: 0 28px 28px;
+}
 
 .btn-p {
-  flex: 2; padding: 14px 18px;
+  flex: 2;
+  padding: 14px 18px;
   background: linear-gradient(135deg, var(--coral), var(--pink));
   color: var(--off);
   border: none;
@@ -319,36 +395,56 @@ body::after {
   position: relative;
   overflow: hidden;
   transition: transform 0.15s, opacity 0.2s;
-  border-radius: 14px;
+  border-radius: 8px;
 }
+
 .btn-p::after {
   content: '';
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background: linear-gradient(135deg, var(--lavender), var(--mint));
-  transform: scaleX(0); transform-origin: right;
+  transform: scaleX(0);
+  transform-origin: right;
   transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
   z-index: 0;
 }
+
 .btn-p:hover::after { transform: scaleX(1); }
-.btn-p span { position: relative; z-index: 1; }
+
+.btn-p span {
+  position: relative;
+  z-index: 1;
+}
+
 .btn-p:active { transform: scale(0.98); }
-.btn-p:disabled { opacity: 0.4; cursor: default; }
+.btn-p:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
 
 .btn-g {
-  flex: 1; padding: 14px 14px;
+  flex: 1;
+  padding: 14px 14px;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.1);
   font-family: 'IBM Plex Sans Arabic', sans-serif;
-  font-size: 12px; font-weight: 400;
+  font-size: 12px;
+  font-weight: 400;
   color: var(--off-dim);
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
-  border-radius: 14px;
+  border-radius: 8px;
 }
-.btn-g:hover { border-color: var(--mint); color: var(--mint); background: rgba(255,255,255,0.02); }
+
+.btn-g:hover {
+  border-color: var(--mint);
+  color: var(--mint);
+  background: rgba(255,255,255,0.02);
+}
 
 /* ── REVIEW ── */
 .review-body { padding: 20px 28px 0; }
+
 .review-row {
   display: flex;
   justify-content: space-between;
@@ -357,7 +453,9 @@ body::after {
   border-bottom: 1px solid rgba(255,255,255,0.06);
   gap: 16px;
 }
+
 .review-row:last-child { border-bottom: none; }
+
 .review-key {
   font-size: 10px;
   font-weight: 500;
@@ -366,6 +464,7 @@ body::after {
   color: var(--off-soft);
   flex-shrink: 0;
 }
+
 .review-val {
   font-size: 15px;
   font-weight: 400;
@@ -375,18 +474,38 @@ body::after {
 }
 
 /* ── CONFIRM ── */
-.confirm-body { padding: 40px 28px 32px; text-align: center; }
+.confirm-body {
+  padding: 40px 28px 32px;
+  text-align: center;
+}
 
 .confirm-check {
-  width: 60px; height: 60px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--coral), var(--pink));
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto 24px;
   animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
 }
-@keyframes popIn { from{transform:scale(0);opacity:0;} to{transform:scale(1);opacity:1;} }
-.confirm-check svg { width: 24px; height: 24px; }
+
+@keyframes popIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.confirm-check svg {
+  width: 24px;
+  height: 24px;
+}
 
 .confirm-name {
   font-size: 1.6rem;
@@ -396,6 +515,7 @@ body::after {
   opacity: 0;
   animation: fadeUp 0.5s ease 0.3s both;
 }
+
 .confirm-msg {
   font-size: 13px;
   font-weight: 300;
@@ -413,22 +533,31 @@ body::after {
   opacity: 0;
   animation: fadeUp 0.5s ease 0.6s both;
 }
+
 .confirm-bars span {
-  height: 4px; width: 40px; border-radius: 2px;
+  height: 4px;
+  width: 40px;
+  border-radius: 2px;
 }
-.confirm-bars span:nth-child(1){background:var(--coral);}
-.confirm-bars span:nth-child(2){background:var(--mint);}
-.confirm-bars span:nth-child(3){background:var(--lavender);}
-.confirm-bars span:nth-child(4){background:var(--gold);}
+
+.confirm-bars span:nth-child(1) { background: var(--coral); }
+.confirm-bars span:nth-child(2) { background: var(--mint); }
+.confirm-bars span:nth-child(3) { background: var(--lavender); }
+.confirm-bars span:nth-child(4) { background: var(--gold); }
 
 /* ── FULL ── */
-.full-body { padding: 48px 28px; text-align: center; }
+.full-body {
+  padding: 48px 28px;
+  text-align: center;
+}
+
 .full-body h2 {
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--off);
   margin-bottom: 10px;
 }
+
 .full-body p {
   font-size: 13px;
   font-weight: 300;
@@ -445,12 +574,14 @@ body::after {
   align-items: center;
   justify-content: space-between;
 }
+
 .footer-ar {
   font-size: 11px;
   font-weight: 500;
   color: var(--off-dim);
   letter-spacing: 0.02em;
 }
+
 .footer-en {
   font-size: 10px;
   font-weight: 300;
@@ -465,25 +596,39 @@ body::after {
   background: linear-gradient(90deg, var(--coral), var(--gold), var(--mint), var(--lavender));
   animation: growW 1s ease-out 0.2s both;
 }
-@keyframes growW { from{transform:scaleX(0);} to{transform:scaleX(1);} }
+
+@keyframes growW {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
 
 /* responsive */
 @media (max-width: 560px) {
   body { padding: 34px 14px 54px; }
+
   .wrap { max-width: 100%; }
+
   .header-top { margin-bottom: 10px; }
+
   .header-club-logo { width: min(200px, 62%); }
+
   .header-main-logo { max-width: 100%; }
-  .card { border-radius: 18px; }
+
+  .card { border-radius: 12px; }
+
   .seats,
   .form-body,
   .review-body,
   .card-footer,
-  .btn-row { padding-left: 20px; padding-right: 20px; }
+  .btn-row {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 @media (max-width: 420px) {
   .info-card { min-width: 100%; }
+
   .card-footer {
     flex-direction: column;
     gap: 6px;
@@ -503,7 +648,7 @@ body::after {
     </div>
 
     <div class="header-main">
-      <img src="muswaddah-logo.png" alt="مسودة" class="header-main-logo">
+      <img src="muswaddah-logo.png" alt="مسودّة" class="header-main-logo">
     </div>
   </div>
 
@@ -562,8 +707,11 @@ body::after {
           في حال تعذّر عليكِ الحضور، يُرجى إتاحة المقعد لغيركِ.
         </div>
       </div>
+
       <div class="btn-row" style="padding-top:20px;">
-        <button class="btn-p" onclick="goTo(2)" style="flex:1;"><span>سجّلي حضورك ←</span></button>
+        <button class="btn-p" onclick="goTo(2)" style="flex:1;">
+          <span>سجّلي حضورك ←</span>
+        </button>
       </div>
     </div>
 
@@ -574,35 +722,40 @@ body::after {
         <div class="sdot active"></div><div class="sline"></div>
         <div class="sdot"></div>
       </div>
+
       <div class="form-body">
         <p class="page-copy" style="margin-bottom:18px;">
           اكتبي اسمك ورقم الواتساب لتأكيد الحجز،
           ولنتمكن من التواصل معك إن حدث أي تحديث.
         </p>
+
         <div class="field">
           <label class="field-label" for="f-name">الاسم</label>
           <input class="field-input" id="f-name" type="text" placeholder="اسمك" autocomplete="off">
           <div class="underline"></div>
         </div>
+
         <div class="field">
           <label class="field-label" for="f-phone">رقم الواتساب</label>
           <input class="field-input" id="f-phone" type="tel" placeholder="05xxxxxxxx">
           <div class="underline"></div>
         </div>
       </div>
+
       <div class="btn-row">
         <button class="btn-p" onclick="goTo(3,['f-name','f-phone'])"><span>التالي ←</span></button>
         <button class="btn-g" onclick="goTo(1)">رجوع</button>
       </div>
     </div>
 
-    <!-- PAGE 3: Review -->
+    <!-- PAGE 3 -->
     <div class="page" id="p3">
       <div class="steps">
         <div class="sdot done"></div><div class="sline"></div>
         <div class="sdot done"></div><div class="sline"></div>
         <div class="sdot active"></div>
       </div>
+
       <div class="review-body">
         <div class="review-row">
           <span class="review-key">الاسم</span>
@@ -621,13 +774,14 @@ body::after {
           <span class="review-val">الثلاثاء ١٢:٠٠ · غرفة ٢١١</span>
         </div>
       </div>
+
       <div class="btn-row" style="padding-top:20px;">
         <button class="btn-p" id="confirmBtn" onclick="doSubmit()"><span>تأكيد الحجز</span></button>
         <button class="btn-g" onclick="goTo(2)">تعديل</button>
       </div>
     </div>
 
-    <!-- PAGE 4: Confirmed -->
+    <!-- PAGE 4 -->
     <div class="page" id="p4">
       <div class="confirm-body">
         <div class="confirm-check">
@@ -635,35 +789,47 @@ body::after {
             <polyline points="3,12 9,18 21,6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
+
         <div class="confirm-name" id="conf-name">تم حجز مقعدك</div>
+
         <p class="confirm-msg">
           تم تأكيد حضورك في جلسة مسودّة<br>
           مكتبة الكلية، غرفة ٢١١<br>
-          الثلاثاء ١٢:٠٠ - ١:٠٠
+          الثلاثاء ١٢:٠٠ — ١:٠٠
         </p>
+
         <div class="confirm-bars">
           <span></span><span></span><span></span><span></span>
         </div>
       </div>
     </div>
 
-    <!-- PAGE 5: Full -->
+    <!-- PAGE 5 -->
     <div class="page" id="p5">
       <div class="full-body">
-        <div class="div-line"><div class="div-line-l"></div><div class="div-gem"></div><div class="div-line-l"></div></div>
+        <div class="div-line">
+          <div class="div-line-l"></div>
+          <div class="div-gem"></div>
+          <div class="div-line-l"></div>
+        </div>
+
         <h2>اكتملت المقاعد.</h2>
         <p>شكرًا لاهتمامك<br>تابعي النادي للجلسات القادمة.</p>
-        <div class="div-line" style="margin-top:24px;"><div class="div-line-l"></div><div class="div-gem"></div><div class="div-line-l"></div></div>
+
+        <div class="div-line" style="margin-top:24px;">
+          <div class="div-line-l"></div>
+          <div class="div-gem"></div>
+          <div class="div-line-l"></div>
+        </div>
       </div>
     </div>
 
     <!-- Footer -->
     <div class="card-footer">
       <span class="footer-ar">نادي الذكاء الاصطناعي والعلوم التقنية</span>
-      <span class="footer-en">FCITR · AI Club</span>
+      <span class="footer-en">FCITR · AITS Club</span>
     </div>
   </div>
-
 </div>
 
 <script>
@@ -680,18 +846,23 @@ let fd = {};
 
 async function fetchCount() {
   try {
-    const res  = await fetch(CONFIG.APPS_SCRIPT + '?t=' + Date.now());
+    const res = await fetch(CONFIG.APPS_SCRIPT + '?t=' + Date.now());
     const data = await res.json();
     registered = Math.max(0, Number(data.count) || 0);
   } catch (_) {
     registered = 0;
   }
+
   updateSeats();
-  if (registered >= CONFIG.MAX_SEATS) showPage(5);
+
+  if (registered >= CONFIG.MAX_SEATS) {
+    showPage(5);
+  }
 }
 
 function updateSeats() {
   const left = CONFIG.MAX_SEATS - registered;
+
   const el = document.getElementById('seatsNum');
   if (el) el.textContent = Math.max(0, left);
 
@@ -742,7 +913,7 @@ function goTo(n, inputs) {
   }
 
   if (n === 3) {
-    document.getElementById('rv-name').textContent  = fd['f-name']  || '—';
+    document.getElementById('rv-name').textContent = fd['f-name'] || '—';
     document.getElementById('rv-phone').textContent = fd['f-phone'] || '—';
   }
 
@@ -758,7 +929,7 @@ async function doSubmit() {
   btn.querySelector('span').textContent = '...';
 
   const body = new FormData();
-  body.append(CONFIG.ENTRY_NAME,  fd['f-name']  || '');
+  body.append(CONFIG.ENTRY_NAME, fd['f-name'] || '');
   body.append(CONFIG.ENTRY_PHONE, fd['f-phone'] || '');
 
   try {
@@ -772,7 +943,9 @@ async function doSubmit() {
   await fetchCount();
 
   const nameEl = document.getElementById('conf-name');
-  if (nameEl) nameEl.textContent = 'تم حجز مقعدك، ' + (fd['f-name'] || '');
+  if (nameEl) {
+    nameEl.textContent = 'تم حجز مقعدك، ' + (fd['f-name'] || '');
+  }
 
   showPage(registered <= CONFIG.MAX_SEATS ? 4 : 5);
   window.scrollTo({ top: 0, behavior: 'smooth' });
