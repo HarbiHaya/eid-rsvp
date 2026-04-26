@@ -45,7 +45,6 @@ body {
   overflow-x: hidden;
 }
 
-/* dotted board */
 body::before {
   content: '';
   position: fixed;
@@ -57,7 +56,6 @@ body::before {
   z-index: 0;
 }
 
-/* soft overlay */
 body::after {
   content: '';
   position: fixed;
@@ -76,7 +74,6 @@ body::after {
   max-width: 520px;
 }
 
-/* ── HEADER ── */
 .header {
   margin-bottom: 26px;
   animation: fadeUp 0.7s ease-out both;
@@ -84,7 +81,7 @@ body::after {
 
 .header-top {
   display: flex;
-  justify-content: flex-end; /* in RTL this places it on the left */
+  justify-content: flex-end;
   margin-bottom: 14px;
 }
 
@@ -108,7 +105,6 @@ body::after {
   object-fit: contain;
 }
 
-/* ── CARD ── */
 .card {
   background: rgba(255,255,255,0.045);
   border: 1px solid rgba(255,255,255,0.11);
@@ -120,7 +116,6 @@ body::after {
   box-shadow: 0 18px 50px rgba(0,0,0,0.28);
 }
 
-/* ── SEATS BAR ── */
 .seats {
   display: flex;
   align-items: center;
@@ -189,7 +184,6 @@ body::after {
   letter-spacing: 0.04em;
 }
 
-/* ── PAGES ── */
 .page { display: none; }
 
 .page.active {
@@ -198,17 +192,10 @@ body::after {
 }
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── STEPS ── */
 .steps {
   display: flex;
   align-items: center;
@@ -225,12 +212,8 @@ body::after {
   transition: all 0.3s;
 }
 
-.sdot.active {
-  background: var(--mint);
-  transform: scale(1.35);
-}
-
-.sdot.done { background: var(--gold); }
+.sdot.active { background: var(--mint); transform: scale(1.35); }
+.sdot.done   { background: var(--gold); }
 
 .sline {
   width: 22px;
@@ -238,7 +221,6 @@ body::after {
   background: rgba(255,255,255,0.1);
 }
 
-/* ── FORM ── */
 .form-body { padding: 24px 28px 28px; }
 
 .field { margin-bottom: 24px; }
@@ -269,14 +251,8 @@ body::after {
   -webkit-appearance: none;
 }
 
-.field-input::placeholder {
-  color: var(--off-soft);
-  font-size: 13px;
-}
-
-.field-input:focus {
-  border-bottom-color: var(--mint);
-}
+.field-input::placeholder { color: var(--off-soft); font-size: 13px; }
+.field-input:focus { border-bottom-color: var(--mint); }
 
 .underline {
   height: 2px;
@@ -287,11 +263,8 @@ body::after {
   margin-top: -1px;
 }
 
-.field-input:focus ~ .underline {
-  transform: scaleX(1);
-}
+.field-input:focus ~ .underline { transform: scaleX(1); }
 
-/* ── PAGE COPY ── */
 .page-copy {
   font-size: 13px;
   font-weight: 300;
@@ -300,7 +273,6 @@ body::after {
   margin-bottom: 20px;
 }
 
-/* ── INFO CARDS ── */
 .info-row {
   display: flex;
   gap: 10px;
@@ -315,6 +287,11 @@ body::after {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 8px;
+}
+
+/* topic card gets slightly more room */
+.info-card.topic-card {
+  flex: 100%;
 }
 
 .info-k {
@@ -333,12 +310,25 @@ body::after {
   line-height: 1.6;
 }
 
-.info-v .accent {
-  color: var(--coral);
-  font-weight: 600;
+.info-v .accent { color: var(--coral); font-weight: 600; }
+
+/* topic card: bigger bolder topic text */
+.topic-card .info-v {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--off);
+  line-height: 1.5;
 }
 
-/* ── NOTE BOX ── */
+/* host line under topic */
+.info-host {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--mint);
+  margin-top: 7px;
+  letter-spacing: 0.01em;
+}
+
 .note-box {
   padding: 10px 14px;
   background: rgba(255,255,255,0.03);
@@ -352,7 +342,6 @@ body::after {
   border-radius: 8px;
 }
 
-/* ── DIVIDER ── */
 .div-line {
   display: flex;
   align-items: center;
@@ -374,7 +363,6 @@ body::after {
   flex-shrink: 0;
 }
 
-/* ── BUTTONS ── */
 .btn-row {
   display: flex;
   gap: 8px;
@@ -411,16 +399,10 @@ body::after {
 
 .btn-p:hover::after { transform: scaleX(1); }
 
-.btn-p span {
-  position: relative;
-  z-index: 1;
-}
+.btn-p span { position: relative; z-index: 1; }
 
 .btn-p:active { transform: scale(0.98); }
-.btn-p:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
+.btn-p:disabled { opacity: 0.4; cursor: default; }
 
 .btn-g {
   flex: 1;
@@ -442,7 +424,6 @@ body::after {
   background: rgba(255,255,255,0.02);
 }
 
-/* ── REVIEW ── */
 .review-body { padding: 20px 28px 0; }
 
 .review-row {
@@ -473,7 +454,6 @@ body::after {
   line-height: 1.7;
 }
 
-/* ── CONFIRM ── */
 .confirm-body {
   padding: 40px 28px 32px;
   text-align: center;
@@ -492,20 +472,11 @@ body::after {
 }
 
 @keyframes popIn {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
 }
 
-.confirm-check svg {
-  width: 24px;
-  height: 24px;
-}
+.confirm-check svg { width: 24px; height: 24px; }
 
 .confirm-name {
   font-size: 1.6rem;
@@ -545,7 +516,6 @@ body::after {
 .confirm-bars span:nth-child(3) { background: var(--lavender); }
 .confirm-bars span:nth-child(4) { background: var(--gold); }
 
-/* ── FULL ── */
 .full-body {
   padding: 48px 28px;
   text-align: center;
@@ -565,7 +535,6 @@ body::after {
   line-height: 1.9;
 }
 
-/* ── FOOTER ── */
 .card-footer {
   padding: 16px 28px;
   border-top: 1px solid rgba(255,255,255,0.06);
@@ -590,7 +559,6 @@ body::after {
   direction: ltr;
 }
 
-/* ── COLOR BAR top of card ── */
 .card-bar {
   height: 4px;
   background: linear-gradient(90deg, var(--coral), var(--gold), var(--mint), var(--lavender));
@@ -602,25 +570,14 @@ body::after {
   to   { transform: scaleX(1); }
 }
 
-/* responsive */
 @media (max-width: 560px) {
   body { padding: 34px 14px 54px; }
-
   .wrap { max-width: 100%; }
-
   .header-top { margin-bottom: 10px; }
-
   .header-club-logo { width: min(200px, 62%); }
-
   .header-main-logo { max-width: 100%; }
-
   .card { border-radius: 12px; }
-
-  .seats,
-  .form-body,
-  .review-body,
-  .card-footer,
-  .btn-row {
+  .seats, .form-body, .review-body, .card-footer, .btn-row {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -628,12 +585,7 @@ body::after {
 
 @media (max-width: 420px) {
   .info-card { min-width: 100%; }
-
-  .card-footer {
-    flex-direction: column;
-    gap: 6px;
-    text-align: center;
-  }
+  .card-footer { flex-direction: column; gap: 6px; text-align: center; }
 }
 </style>
 </head>
@@ -646,7 +598,6 @@ body::after {
     <div class="header-top">
       <img src="club-logo.png" alt="Club Logo" class="header-club-logo">
     </div>
-
     <div class="header-main">
       <img src="muswaddah-logo.png" alt="مسودّة" class="header-main-logo">
     </div>
@@ -672,39 +623,36 @@ body::after {
     <!-- PAGE 1 -->
     <div class="page active" id="p1">
       <div class="form-body" style="padding-top:26px;">
-        <p class="page-copy">
-          جلسة عن لحظة التعثّـر، وما تكشفه من أنماط،
-          وكيف يقود فهمها إلى بناء نظام أكثر ثباتًا يسهّل البدء ويعين على الاستمرار.
-        </p>
+        <p class="page-copy" id="session-description"></p>
 
         <div class="info-row">
-          <div class="info-card">
+          <!-- Topic card: full width, with host below -->
+          <div class="info-card topic-card">
             <div class="info-k">الموضوع</div>
-            <div class="info-v">من أنت في لحظة التعثّر؟</div>
-          </div>
-          <div class="info-card">
-            <div class="info-k">المكان</div>
-            <div class="info-v">مكتبة الكلية<br><span class="accent">211</span></div>
+            <div class="info-v" id="card-topic"></div>
+            <div class="info-host" id="card-host"></div>
           </div>
         </div>
 
         <div class="info-row">
           <div class="info-card">
-            <div class="info-k">اليوم</div>
-            <div class="info-v">الثلاثاء · <span class="accent">21 أبريل 2026</span></div>
+            <div class="info-k">المكان</div>
+            <div class="info-v" id="card-location"></div>
           </div>
           <div class="info-card">
             <div class="info-k">الوقت</div>
-            <div class="info-v">
-              <span class="accent"> 12:00PM - 1:00PM </span> 
-            </div>
+            <div class="info-v" id="card-time"></div>
           </div>
         </div>
 
-        <div class="note-box">
-          باب النقاش مفتوح ومحبّب للجميع —
-          في حال تعذّر عليكِ الحضور، يرجى إتاحة المقعد لغيرك.
+        <div class="info-row">
+          <div class="info-card" style="flex:100%;">
+            <div class="info-k">اليوم</div>
+            <div class="info-v" id="card-day"></div>
+          </div>
         </div>
+
+        <div class="note-box" id="card-note"></div>
       </div>
 
       <div class="btn-row" style="padding-top:20px;">
@@ -766,11 +714,15 @@ body::after {
         </div>
         <div class="review-row">
           <span class="review-key">الجلسة</span>
-          <span class="review-val">من أنت في لحظة التعثّر؟</span>
+          <span class="review-val" id="rv-topic">—</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">المكان</span>
+          <span class="review-val" id="rv-location">—</span>
         </div>
         <div class="review-row">
           <span class="review-key">الوقت</span>
-          <span class="review-val">الثلاثاء ١٢:٠٠ · غرفة ٢١١</span>
+          <span class="review-val" id="rv-when">—</span>
         </div>
       </div>
 
@@ -788,15 +740,8 @@ body::after {
             <polyline points="3,12 9,18 21,6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-
         <div class="confirm-name" id="conf-name">تم حجز مقعدك</div>
-
-        <p class="confirm-msg">
-          تم تأكيد حضورك في جلسة مسودّة<br>
-          مكتبة الكلية، غرفة ٢١١<br>
-          الثلاثاء ١٢:٠٠ — ١:٠٠
-        </p>
-
+        <p class="confirm-msg" id="conf-msg"></p>
         <div class="confirm-bars">
           <span></span><span></span><span></span><span></span>
         </div>
@@ -811,10 +756,8 @@ body::after {
           <div class="div-gem"></div>
           <div class="div-line-l"></div>
         </div>
-
         <h2>اكتملت المقاعد.</h2>
         <p>شكرًا لاهتمامك<br>تابعي النادي للجلسات القادمة.</p>
-
         <div class="div-line" style="margin-top:24px;">
           <div class="div-line-l"></div>
           <div class="div-gem"></div>
@@ -832,14 +775,61 @@ body::after {
 </div>
 
 <script>
+/* ══════════════════════════════════════════════
+   ▸  SESSION CONFIG — edit this block only
+   ══════════════════════════════════════════════ */
+const SESSION = {
+  topic       : 'أن تظهر قبل أن تصـل',     // عنوان الجلسة
+  host        : 'مع د. انتصار الكيال',       // اسم المحاضر/ة (اتركي فارغاً إن لم يكن)
+  description : 'جلسة عن لحظة التعثّـر، وما تكشفه من أنماط، وكيف يقود فهمها إلى بناء نظام أكثر ثباتًا يسهّل البدء ويعين على الاستمرار.',
+  location    : 'مكتبة الكلية · <span class="accent">٢١١</span>',
+  day         : 'الثلاثاء · <span class="accent">٢٨ أبريل ٢٠٢٦</span>',
+  time        : '<span class="accent">١٢:٠٠ — ١:٠٠</span>',
+  note        : 'باب النقاش مفتوح ومحبّب للجميع — في حال تعذّر عليكِ الحضور، يرجى إتاحة المقعد لغيرك.',
+
+  // confirm page
+  confirmLocation : 'مكتبة الكلية، غرفة ٢١١',
+  confirmTime     : 'الثلاثاء ١٢:٠٠ — ١:٠٠',
+};
+
+/* ══════════════════════════════════════════════
+   ▸  FORM / SHEET CONFIG
+   ══════════════════════════════════════════════ */
 const CONFIG = {
-  MAX_SEATS   : 21,
+  MAX_SEATS   : 23,
   FORM_ID     : '1FAIpQLSd-tXPBJZgCnEg61NR3BLTxTb1q2UaqkZeSMnBCLG1RX_9WpA',
   ENTRY_NAME  : 'entry.808042801',
   ENTRY_PHONE : 'entry.1460156963',
   APPS_SCRIPT : 'https://script.google.com/macros/s/AKfycbwMhyScmzVQ78xHZRmwsC7yQye34oIpSGmq2k40SwVFRmo3xwwc-wYFFCskPhC5RXvI/exec'
 };
 
+/* ── render session info ── */
+function renderSession() {
+  document.getElementById('card-topic').innerHTML    = SESSION.topic;
+  document.getElementById('card-host').innerHTML     = SESSION.host || '';
+  document.getElementById('card-location').innerHTML = SESSION.location;
+  document.getElementById('card-day').innerHTML      = SESSION.day;
+  document.getElementById('card-time').innerHTML     = SESSION.time;
+  document.getElementById('session-description').textContent = SESSION.description;
+  document.getElementById('card-note').textContent   = SESSION.note;
+
+  // hide host line if empty
+  const hostEl = document.getElementById('card-host');
+  if (hostEl) hostEl.style.display = SESSION.host ? '' : 'none';
+
+  // review page
+  document.getElementById('rv-topic').textContent    = SESSION.topic;
+  document.getElementById('rv-location').textContent = SESSION.confirmLocation;
+  document.getElementById('rv-when').textContent     = SESSION.confirmTime;
+
+  // confirm page
+  document.getElementById('conf-msg').innerHTML =
+    'تم تأكيد حضورك في جلسة مسودّة<br>' +
+    SESSION.confirmLocation + '<br>' +
+    SESSION.confirmTime;
+}
+
+/* ── seats ── */
 let registered = 0;
 let fd = {};
 
@@ -904,7 +894,6 @@ function goTo(n, inputs) {
         return;
       }
     }
-
     for (const id of inputs) {
       const el = document.getElementById(id);
       if (el) fd[id] = el.value.trim();
@@ -912,7 +901,7 @@ function goTo(n, inputs) {
   }
 
   if (n === 3) {
-    document.getElementById('rv-name').textContent = fd['f-name'] || '—';
+    document.getElementById('rv-name').textContent  = fd['f-name']  || '—';
     document.getElementById('rv-phone').textContent = fd['f-phone'] || '—';
   }
 
@@ -928,7 +917,7 @@ async function doSubmit() {
   btn.querySelector('span').textContent = '...';
 
   const body = new FormData();
-  body.append(CONFIG.ENTRY_NAME, fd['f-name'] || '');
+  body.append(CONFIG.ENTRY_NAME,  fd['f-name']  || '');
   body.append(CONFIG.ENTRY_PHONE, fd['f-phone'] || '');
 
   try {
@@ -950,6 +939,7 @@ async function doSubmit() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+renderSession();
 fetchCount();
 </script>
 </body>
